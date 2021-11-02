@@ -1,0 +1,73 @@
+---
+title: "Case Study"
+author: "Charbel Berkachi"
+output:
+  github_document
+---
+## Scenario
+
+Sršen asks you to analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices. She then wants you to select one Bellabeat product to apply these insights to in your presentation. These questions
+will guide your analysis:
+*What are some trends in smart device usage?
+*How could these trends apply to Bellabeat customers?
+*How could these trends help influence Bellabeat marketing strategy?
+
+## Business task
+
+It's about analyzing any trend concerning Bellabeat customers, and how it will help for growth.
+
+## Data sources used
+
+[FitBit Fitness Tracker Data](www.kaggle.com/arashnic/fitbit) (CC0: Public Domain, dataset made available through [Mobius](www.kaggle.com/arashnic)).Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring:
+
+## Data cleaning
+
+#### The file used from the data source
+
+```{r}
+library(tidyverse)
+library(readr)
+sleepDay_merged <- read_csv("sleepDay_merged.csv")
+as_tibble(sleepDay_merged)
+```
+
+#### File cleaning
+
+Excel was used for data cleaning.
+
+```{r echo=TRUE}
+library(tidyverse)
+library(readr)
+Sleep <- read_csv("Sleep.csv")
+as_tibble(Sleep)
+```
+
+* Id has been transformed to names
+* Minutes have been transformed to hours
+* Date has been transformed to the number of days
+
+## Analysis
+
+R was used for visualizing the data concerning four members sleep hours.
+
+```{r}
+ggplot(data = Sleep)+
+  geom_point(mapping = aes(x=Date,y=Sleep,color=ID))+
+  facet_wrap(~ID)+
+  labs(title = "Hours of sleep",
+       subtitle = "A comparison of four persons wearing a Bellabeat product during sleep hours")+
+  xlab("Days")+
+  ylab("Hours")+
+  labs(color="Members")
+```
+
+#### Findings
+
+The sleeping hours differ over members, there is no specific attention that the sleeping hours should be between 7-8 hours.
+
+## Recommendations
+
+Based on the information that everyone should sleep 7-8 hours daily, my recommendations are:
+
+* Every member that sleeps less than 7 hours and more than 8 hours, should get a warning message on their device.
+* Members should get a message regularly to remember them that they should sleep 7-8 hours.
